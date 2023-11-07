@@ -80,6 +80,7 @@ export default function Homepage({ navigation }) {
   };
 
   useEffect(() => {
+    console.log("location", location);
     if (location) fetchData();
   }, [location]);
 

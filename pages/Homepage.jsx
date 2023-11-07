@@ -134,18 +134,19 @@ export default function Homepage({ navigation }) {
     setYagna(false);
   };
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+  const getLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      setErrorMsg("Permission to access location was denied");
+      return;
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  };
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
+  useEffect(() => {
+    if (!location) getLocation();
+  });
 
   useEffect(() => {
     if (yagna) return;

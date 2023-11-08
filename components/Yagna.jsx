@@ -10,6 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
 import Logo from "../assets/icon";
+import * as NavigationBar from "expo-navigation-bar";
 
 export default function Yagna({ morning, handleDone }) {
   const [fontsLoaded, fontError] = useFonts({
@@ -22,6 +23,9 @@ export default function Yagna({ morning, handleDone }) {
       </View>
     );
   }
+
+  NavigationBar.setBackgroundColorAsync("#c28c00");
+
   let text = morning
     ? `“Sooryaaya swahaa sooryaaya idam na mama Prajaapataye swahaa prajaapataye idam na mama”`
     : `“Agnaye swahaa Agnaye idam na mama Prajaapataye swahaa prajaapataye idam na mama”`;

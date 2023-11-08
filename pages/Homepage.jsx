@@ -69,8 +69,10 @@ export default function Homepage({ navigation }) {
     const data = await response.json();
     setSunrise(getConvertedTime(data?.results?.sunrise));
     setSunset(getConvertedTime(data?.results?.sunset));
-    setSunriseRemaining(remainingTime(sunrise));
-    setSunsetRemaining(remainingTime(sunset));
+    setSunriseRemaining(
+      remainingTime(getConvertedTime(data?.results?.sunrise))
+    );
+    setSunsetRemaining(remainingTime(getConvertedTime(data?.results?.sunset)));
     const tommorowResponse = await fetch(
       `https://api.sunrise-sunset.org/json?lat=${location?.coords.latitude}&lng=${location?.coords.longitude}&formatted=0&date=tomorrow`
     );

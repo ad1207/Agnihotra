@@ -76,12 +76,13 @@ export default function Homepage({ navigation }) {
     );
     const tommorowData = await tommorowResponse.json();
     setTomorowSunrise(getConvertedTime(tommorowData?.results?.sunrise));
-    setTommorowSunriseRemaining(nextDayRemainingTime(tommorowSunrise));
+    setTommorowSunriseRemaining(
+      nextDayRemainingTime(getConvertedTime(tommorowData?.results?.sunrise))
+    );
     setLoading(false);
   };
 
   useEffect(() => {
-    console.log("location", location);
     if (location) fetchData();
   }, [location]);
 
@@ -135,7 +136,10 @@ export default function Homepage({ navigation }) {
     setYagna(false);
   };
 
-  NavigationBar.setBackgroundColorAsync(dark ? "#01212f" : "#e1f5fe");
+  useEffect(() => {
+    if (navigation.isFocused())
+      NavigationBar.setBackgroundColorAsync(dark ? "#01212f" : "#e1f5fe");
+  });
 
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -392,7 +396,7 @@ const reduceTime = (time) => {
     newHours -= 1;
   }
   if (newHours < 0) {
-    newHours = 0;
+    return "00:00:00";
   }
   let newTime = "";
   if (newHours < 10) newTime += "0";

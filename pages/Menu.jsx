@@ -6,6 +6,7 @@ import About from "../components/About";
 import Privacy from "../components/Privacy";
 import { NavigationContainer } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
+import { useEffect } from "react";
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,9 @@ export default function Menu({ navigation }) {
     navigation.navigate("Homepage");
   };
 
-  NavigationBar.setBackgroundColorAsync("#fff");
+  useEffect(() => {
+    if (navigation.isFocused()) NavigationBar.setBackgroundColorAsync("#fff");
+  });
 
   return (
     <NavigationContainer independent={true}>

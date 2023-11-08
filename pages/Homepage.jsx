@@ -16,7 +16,7 @@ import Header from "../components/Header";
 import Card from "../components/Card";
 import Yagna from "../components/Yagna";
 import { useFonts, Montserrat_400Regular } from "@expo-google-fonts/montserrat";
-
+import * as NavigationBar from "expo-navigation-bar";
 if (
   Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -135,6 +135,8 @@ export default function Homepage({ navigation }) {
     setYagna(false);
   };
 
+  NavigationBar.setBackgroundColorAsync(dark ? "#01212f" : "#e1f5fe");
+
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -175,7 +177,10 @@ export default function Homepage({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" backgroundColor={dark?"#01212f":"#81d4f4"} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={dark ? "#004c6f" : "#81d4f4"}
+      />
       <View style={styles.container}>
         <LinearGradient
           style={styles.gradient}

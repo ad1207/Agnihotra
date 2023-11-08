@@ -1,4 +1,3 @@
-import "react-native-gesture-handler";
 import { StyleSheet, Text, View } from "react-native";
 import {
   createStackNavigator,

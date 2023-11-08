@@ -1,13 +1,12 @@
 import {
   View,
   Text,
-  Button,
   StyleSheet,
-  Touchable,
   TouchableOpacity,
   ScrollView,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
 import Logo from "../assets/icon";
@@ -27,12 +26,13 @@ export default function Yagna({ morning, handleDone }) {
     ? `“Sooryaaya swahaa sooryaaya idam na mama Prajaapataye swahaa prajaapataye idam na mama”`
     : `“Agnaye swahaa Agnaye idam na mama Prajaapataye swahaa prajaapataye idam na mama”`;
   return (
-    <View style={styles.yagnaPage}>
-      <LinearGradient
-        colors={["#fdff88", "#c28c00"]}
-        style={{ height: "100%", width: "100%" }}
-      >
-        <SafeAreaView>
+    <SafeAreaView>
+      <StatusBar barStyle="light-content" backgroundColor="#fdff88" />
+      <View style={styles.yagnaPage}>
+        <LinearGradient
+          colors={["#fdff88", "#c28c00"]}
+          style={{ height: "100%", width: "100%" }}
+        >
           <View style={styles.yagnaContainer}>
             <View style={styles.head}>
               <Text style={styles.headText}>
@@ -60,16 +60,14 @@ export default function Yagna({ morning, handleDone }) {
               </View>
             </View>
           </View>
-        </SafeAreaView>
-      </LinearGradient>
-    </View>
+        </LinearGradient>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  yagnaPage: {
-    
-  },
+  yagnaPage: {},
   yagnaContainer: {
     height: "100%",
     width: "100%",

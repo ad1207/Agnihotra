@@ -5,8 +5,9 @@ import {
   View,
   Platform,
   UIManager,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
@@ -173,12 +174,13 @@ export default function Homepage({ navigation }) {
   if (yagna) return <Yagna morning={morning} handleDone={handleDone} />;
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        style={styles.gradient}
-        colors={dark ? eveningGradient : morningGradient}
-      >
-        <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" backgroundColor={dark?"#01212f":"#81d4f4"} />
+      <View style={styles.container}>
+        <LinearGradient
+          style={styles.gradient}
+          colors={dark ? eveningGradient : morningGradient}
+        >
           <Navbar
             dark={dark}
             location={location}
@@ -215,9 +217,9 @@ export default function Homepage({ navigation }) {
               />
             </>
           )}
-        </SafeAreaView>
-      </LinearGradient>
-    </View>
+        </LinearGradient>
+      </View>
+    </SafeAreaView>
   );
 }
 

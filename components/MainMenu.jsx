@@ -1,5 +1,12 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+  Linking,
+} from "react-native";
 import CloseModalButton from "./CloseModalButton";
 import Logo from "../assets/icon";
 import {
@@ -20,7 +27,8 @@ export default function MainMenu({ navigation, closeModal }) {
     );
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#fff", height: "100%" }}>
+      <StatusBar barStyle="light-content" backgroundColor="#fff" />
       <CloseModalButton state={"mainMenu"} closeModal={() => closeModal()} />
       <View style={styles.menuContainer}>
         <View style={styles.logo}>
@@ -49,10 +57,12 @@ export default function MainMenu({ navigation, closeModal }) {
             <Text style={styles.pageText}>Disclaimer</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.contactUs}>
+        <TouchableOpacity style={styles.contactUs} onPress={async ()=>{
+          await Linking.openURL('mailto:info@vprana.in');
+        }}>
           <Text style={styles.contactText1}>Contact us at</Text>
           <Text style={styles.contactText2}>info@vprana.in</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

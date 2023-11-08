@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
 import { TransitionPresets } from "@react-navigation/stack";
 import MainMenu from "../components/MainMenu";
@@ -28,19 +26,19 @@ export default function Menu({ navigation }) {
         </Stack.Screen>
         <Stack.Screen
           name="Disclaimer"
-          options={{ ...TransitionPresets.ScaleFromCenterAndroid }}
+          options={{ ...TransitionPresets.SlideFromRightIOS }}
         >
           {(props) => <Disclaimer {...props} closeModal={() => closeModal()} />}
         </Stack.Screen>
         <Stack.Screen
           name="About"
-          options={{ ...TransitionPresets.ScaleFromCenterAndroid }}
+          options={{ ...TransitionPresets.SlideFromRightIOS }}
         >
           {(props) => <About {...props} closeModal={() => closeModal()} />}
         </Stack.Screen>
         <Stack.Screen
           name="Privacy"
-          options={{ ...TransitionPresets.ScaleFromCenterAndroid }}
+          options={{ ...TransitionPresets.SlideFromRightIOS }}
         >
           {(props) => <Privacy {...props} closeModal={() => closeModal()} />}
         </Stack.Screen>

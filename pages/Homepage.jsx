@@ -207,21 +207,21 @@ export default function Homepage({ navigation }) {
           ) : dark ? (
             <Card
               dark={dark}
-              displayTime={tommorowSunrise}
+              displayTime={get12HourTime(tommorowSunrise)}
               remainingTime={tommorowSunriseRemaining}
             />
           ) : (
             <>
               <Card
                 active={morning}
-                displayTime={sunrise}
+                displayTime={get12HourTime(sunrise)}
                 remainingTime={sunriseRemaining}
                 morning={true}
                 dark={dark}
               />
               <Card
                 active={!morning}
-                displayTime={sunset}
+                displayTime={get12HourTime(sunset)}
                 remainingTime={sunsetRemaining}
                 morning={false}
                 dark={dark}
@@ -313,6 +313,31 @@ const getConvertedTime = (dateString) => {
   };
   const convertedTime = date.toLocaleString("en-US", options);
   return convertedTime;
+};
+
+const get12HourTime = (dateString) => {
+  if (!dateString) return;
+  const [hours, minutes, seconds] = dateString.split(":").map(Number);
+
+  // Format the time in 12-hour format with AM/PM
+  const formattedTime = new Date(
+    0,
+    0,
+    0,
+    hours,
+    minutes,
+    seconds
+  ).toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+
+  return formattedTime.replace(/(\d{1,2}:\d{2}:\d{2})/, (_, time) => {
+    const [hh, mm, ss] = time.split(":");
+    return `${hh.padStart(2, "0")}:${mm}:${ss}`;
+  });
 };
 
 const nextDayRemainingTime = (targetTime) => {

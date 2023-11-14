@@ -25,6 +25,10 @@ export default function Card({
     displayTime?.substring(6, 8)
   );
 
+  const [displayTimeFormat, setDisplayTimeFormat] = useState(
+    displayTime?.substring(9, 11)
+  );
+
   const [remainingTimeH, setRemainingTimeH] = useState(
     remainingTime?.substring(0, 2)
   );
@@ -77,6 +81,7 @@ export default function Card({
       getReady={getReady}
       displayTimeHnM={displayTimeHnM}
       displayTimeS={displayTimeS}
+      displayTimeFormat={displayTimeFormat}
       remainingTimeH={remainingTimeH}
       remainingTimeM={remainingTimeM}
       remainingTimeS={remainingTimeS}
@@ -86,6 +91,7 @@ export default function Card({
       getReady={getReady}
       displayTimeHnM={displayTimeHnM}
       displayTimeS={displayTimeS}
+      displayTimeFormat={displayTimeFormat}
       remainingTimeH={remainingTimeH}
       remainingTimeM={remainingTimeM}
       remainingTimeS={remainingTimeS}
@@ -94,6 +100,7 @@ export default function Card({
     <MorningInactiveCard
       displayTimeHnM={displayTimeHnM}
       displayTimeS={displayTimeS}
+      displayTimeFormat={displayTimeFormat}
       remainingTimeH={remainingTimeH}
       remainingTimeM={remainingTimeM}
       remainingTimeS={remainingTimeS}
@@ -102,6 +109,7 @@ export default function Card({
     <EveningInactiveCard
       displayTimeHnM={displayTimeHnM}
       displayTimeS={displayTimeS}
+      displayTimeFormat={displayTimeFormat}
       remainingTimeH={remainingTimeH}
       remainingTimeM={remainingTimeM}
       remainingTimeS={remainingTimeS}
@@ -113,6 +121,7 @@ const EveningActiveCard = ({
   getReady,
   displayTimeHnM,
   displayTimeS,
+  displayTimeFormat,
   remainingTimeH,
   remainingTimeM,
   remainingTimeS,
@@ -126,7 +135,9 @@ const EveningActiveCard = ({
           </View>
           <View style={styles.time}>
             <Text style={styles.timeTextBig}>{displayTimeHnM}</Text>
-            <Text style={styles.timeTextSmall}>:{displayTimeS}s</Text>
+            <Text style={styles.timeTextSmall}>
+              :{displayTimeS}s {displayTimeFormat}
+            </Text>
           </View>
           <View style={styles.remainingTime}>
             <Text style={styles.activeRemainingTimeText}>
@@ -151,6 +162,7 @@ const MorningActiveCard = ({
   getReady,
   displayTimeHnM,
   displayTimeS,
+  displayTimeFormat,
   remainingTimeH,
   remainingTimeM,
   remainingTimeS,
@@ -164,7 +176,9 @@ const MorningActiveCard = ({
           </View>
           <View style={styles.time}>
             <Text style={styles.timeTextBig}>{displayTimeHnM}</Text>
-            <Text style={styles.timeTextSmall}>:{displayTimeS}s</Text>
+            <Text style={styles.timeTextSmall}>
+              :{displayTimeS}s {displayTimeFormat}
+            </Text>
           </View>
           <View style={styles.remainingTime}>
             <Text style={styles.activeRemainingTimeText}>
@@ -188,6 +202,7 @@ const MorningActiveCard = ({
 const MorningInactiveCard = ({
   displayTimeHnM,
   displayTimeS,
+  displayTimeFormat,
   remainingTimeH,
   remainingTimeM,
   remainingTimeS,
@@ -200,7 +215,9 @@ const MorningInactiveCard = ({
         </View>
         <View style={styles.time}>
           <Text style={styles.timeTextBig}>{displayTimeHnM}</Text>
-          <Text style={styles.timeTextSmall}>:{displayTimeS}s</Text>
+          <Text style={styles.timeTextSmall}>
+            :{displayTimeS}s {displayTimeFormat}
+          </Text>
         </View>
       </View>
     </View>
@@ -210,6 +227,7 @@ const MorningInactiveCard = ({
 const EveningInactiveCard = ({
   displayTimeHnM,
   displayTimeS,
+  displayTimeFormat,
   remainingTimeH,
   remainingTimeM,
   remainingTimeS,
@@ -222,7 +240,9 @@ const EveningInactiveCard = ({
         </View>
         <View style={styles.time}>
           <Text style={styles.timeTextBig}>{displayTimeHnM}</Text>
-          <Text style={styles.timeTextSmall}>:{displayTimeS}s</Text>
+          <Text style={styles.timeTextSmall}>
+            :{displayTimeS}s {displayTimeFormat}
+          </Text>
         </View>
         <View style={styles.remainingTime}>
           <Text style={styles.remainingTimeText}>

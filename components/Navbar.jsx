@@ -19,6 +19,8 @@ export default function Navbar({ dark, openModal, location }) {
     NotoSans_700Bold,
   });
 
+  // console.log(location);
+
   useEffect(() => {
     if (location) {
       fetch(
@@ -30,8 +32,14 @@ export default function Navbar({ dark, openModal, location }) {
             data.address.city ??
             data.address.state_district ??
             data.address.state ??
-            data.address.country;
+            data.address.country ??
+            convertToDMS(location.coords.latitude, location.coords.longitude);
           setLocationText(text.toUpperCase());
+        })
+        .catch((err) => {
+          setLocationText(
+            convertToDMS(location.coords.latitude, location.coords.longitude)
+          );
         });
     }
   }, [location]);
@@ -128,3 +136,28 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 });
+
+function convertToDMS(latitude, longitude) {
+  // Convert latitude to DMS (Degrees, Minutes, Seconds)
+  const latDMS = convertToDegreesMinutesSeconds(latitude);
+  const latDirection = latitude >= 0 ? "N" : "S";
+
+  // Convert longitude to DMS (Degrees, Minutes, Seconds)
+  const lonDMS = convertToDegreesMinutesSeconds(longitude);
+  const lonDirection = longitude >= 0 ? "E" : "W";
+
+  // Format the result
+  const formattedResult = `${latDMS.toFixed(
+    1
+  )} ${latDirection}, ${lonDMS.toFixed(1)} ${lonDirection}`;
+
+  return formattedResult;
+}
+
+function convertToDegreesMinutesSeconds(coordinate) {
+  const absoluteCoordinate = Math.abs(coordinate);
+  const degrees = Math.floor(absoluteCoordinate);
+  const minutes = (absoluteCoordinate - degrees) * 60;
+
+  return degrees + minutes / 60;
+}

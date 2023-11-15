@@ -402,6 +402,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: "#003d60",
   },
+
   remainingTime: {
     textAlign: "center",
     alignItems: "center",
@@ -438,6 +439,7 @@ const styles = StyleSheet.create({
     lineHeight: 39,
     letterSpacing: 0,
     color: "#ffffff",
+    textAlign: "center",
   },
   nightRemainingTimeText: {
     textAlign: "center",
